@@ -131,6 +131,7 @@ export function createSolaceClient({
         resolve({
           ...session,
           // extend base session object w/ overloaded methods and utils
+          disconnect,
           subscribe,
           unsubscribe,
           logInfo,
@@ -202,6 +203,16 @@ export function createSolaceClient({
         logErro(error);
       }
     });
+  }
+
+  function disconnect() {
+    if (session !== null) {
+      try {
+        session.disconnect();
+      } catch (error) {
+        logError(error);
+      }
+    }
   }
 
   /**
