@@ -7,7 +7,8 @@
   }
 </script>
 
-<div class="px-4 py-5 mt-2 sm:p-6 md:mt-0">
+<div class="px-4 py-5 mt-2 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+  <h2 class="text-xl text-gray-900 sm:text-2xl">Subscribe to exchange feeds</h2>
   <div class="flex mt-2">
     <button
       on:click={() => toggle('NASDAQ')}

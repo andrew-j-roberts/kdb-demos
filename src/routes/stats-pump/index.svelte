@@ -15,17 +15,14 @@
 </script>
 
 <main>
-  <div class="flex flex-col p-4 max-w-screen">
-    <Header />
-    <div class="flex flex-col mt-4 md:flex-row md:mt-0">
-      <div class="flex-shrink-0">
-        <ConnectionForm />
-      </div>
-      <div
-        class="flex-grow my-4 overflow-x-auto bg-white rounded-lg shadow md:mt-0 md:ml-4">
-        <ExchangesPanel />
-        <EqTickersList />
-      </div>
+  <div class="flex flex-col h-screen p-4 max-w-screen md:flex-row">
+    <div class="flex-shrink-0">
+      <ConnectionForm />
+      <ExchangesPanel />
+    </div>
+    <div
+      class="flex-grow my-4 overflow-x-auto bg-white rounded-lg shadow md:mt-0 md:ml-4">
+      <EqTickersList />
     </div>
   </div>
 </main>

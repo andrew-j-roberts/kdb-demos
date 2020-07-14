@@ -72,7 +72,6 @@
 
     send("CONNECT_REQUEST");
     $solaceClient = await _solaceClient.connect();
-    console.dir($solaceClient);
   }
 
   async function handleDisconnect() {
@@ -83,7 +82,7 @@
 </script>
 
 <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-  <div class="flex items-center ">
+  <div class="flex items-center">
     <h2 class="text-xl text-gray-900 sm:text-2xl">
       Establish connection to Solace
     </h2>
