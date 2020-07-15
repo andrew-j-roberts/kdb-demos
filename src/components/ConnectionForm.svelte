@@ -4,6 +4,7 @@
   import { createSolaceClient, solaceContextKey } from "./solace-client";
   import { createMachine } from "@xstate/fsm";
   import { useMachine } from "./useMachine";
+  import ConnectionSpinner from "./ConnectionSpinner.svelte";
 
   let detailSectionOpen = true;
 
@@ -181,12 +182,13 @@
     </div>
   {/if}
 
-  <div class="flex mt-2">
+  <div class="flex items-center mt-2">
     <div class="mr-2">
       <button
         on:click={handleConnect}
         type="button"
-        class="inline-flex items-center px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-green-600 border border-transparent rounded-md hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700">
+        disabled={$state.value == 'connected'}
+        class={`inline-flex items-center px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-green-600 border border-transparent rounded-md hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 ${$state.value == 'connected' ? 'cursor-not-allowed' : ''}`}>
         Connect
       </button>
     </div>
@@ -194,10 +196,16 @@
       <button
         on:click={handleDisconnect}
         type="button"
-        class="inline-flex items-center px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700">
+        disabled={$state.value == 'disconnected'}
+        class={`inline-flex items-center px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 ${$state.value == 'disconnected' ? 'cursor-not-allowed' : ''}`}>
         Disconnect
       </button>
     </div>
+    {#if $state.value == 'connecting'}
+      <div class="mr-2">
+        <ConnectionSpinner />
+      </div>
+    {/if}
     <div class="flex items-center justify-end flex-grow">
       <div>
         {#if detailSectionOpen}

@@ -8,34 +8,9 @@
   const { getSolaceClient } = getContext(solaceContextKey);
   let solaceClient = getSolaceClient();
 
-  const tickEventHandler = (message) => handleTick(parseTickEvent(message));
-
-  function handleTick(tickEvent) {
-    tickers = { ...tickers, [tickEvent.symbol]: tickEvent };
-  }
-
-  function parseTickEvent(message) {
-    let container = message.getSdtContainer();
-    let text = null;
-    if (container != null) {
-      return container.getValue();
-    } else {
-      return JSON.parse(message.getBinaryAttachment());
-    }
-  }
-
   // runs when either  solaceClient or exchangeFeedStates updates
   $: if ($solaceClient) {
-    for (const exchange of Object.keys($exchangeFeedStates)) {
-      if ($exchangeFeedStates[exchange]) {
-        $solaceClient.subscribe(
-          `EQ/marketData/v1/*/${exchange}/>`,
-          tickEventHandler
-        );
-      } else {
-        $solaceClient.unsubscribe(`EQ/marketData/v1/*/${exchange}/>`);
-      }
-    }
+    //$solaceClient.connectQueueConsumer();
   }
 </script>
 
