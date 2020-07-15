@@ -1,9 +1,7 @@
 <script>
   import { getContext } from "svelte";
   import { solaceContextKey } from "../../components/solace-client";
-  import { exchangeFeedStates } from "../../components/stores.js";
-
-  let tickers = {};
+  import { exchangeFeedStates, tickers } from "../../components/stores.js";
 
   const { getSolaceClient } = getContext(solaceContextKey);
   let solaceClient = getSolaceClient();
@@ -11,7 +9,7 @@
   const tickEventHandler = (message) => handleTick(parseTickEvent(message));
 
   function handleTick(tickEvent) {
-    tickers = { ...tickers, [tickEvent.symbol]: tickEvent };
+    $tickers = { ...$tickers, [tickEvent.symbol]: tickEvent };
   }
 
   function parseTickEvent(message) {
@@ -93,40 +91,40 @@
           </tr>
         </thead>
         <tbody class="bg-white">
-          {#each Object.keys(tickers) as ticker}
+          {#each Object.keys($tickers) as ticker}
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].date}
+                {$tickers[ticker].date}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].time}
+                {$tickers[ticker].time}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].symbol}
+                {$tickers[ticker].symbol}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].exchange}
+                {$tickers[ticker].exchange}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].currency}
+                {$tickers[ticker].currency}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].tradePrice}
+                {$tickers[ticker].tradePrice}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].tradeSize}
+                {$tickers[ticker].tradeSize}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].bidPrice}
+                {$tickers[ticker].bidPrice}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].bidSize}
+                {$tickers[ticker].bidSize}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].askPrice}
+                {$tickers[ticker].askPrice}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                {tickers[ticker].askSize}
+                {$tickers[ticker].askSize}
               </td>
             </tr>
           {/each}

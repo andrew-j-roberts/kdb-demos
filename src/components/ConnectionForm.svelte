@@ -49,10 +49,10 @@
   const { getSolaceClient } = getContext(solaceContextKey);
   let solaceClient = getSolaceClient();
 
-  let url = "ws://mr6cmufo3kilp.messaging.solace.cloud:80";
-  let vpnName = "ajr";
+  let url = "wss://mr2mbqbl71aln1.messaging.solace.cloud:443";
+  let vpnName = "himanshu-demo-dev";
   let userName = "solace-cloud-client";
-  let password = "ig8pf95kah4appnglvkrgn2hot";
+  let password = "6vvh40rvsadbm960uhn5scrb2g";
 
   async function handleConnect() {
     let _solaceClient = createSolaceClient({

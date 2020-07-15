@@ -6,3 +6,7 @@ export const exchangeFeedStates = writable({
   LSE: false,
   SGX: false,
 });
+
+export const tickers = writable({});
+
+export const stats = writable({});
